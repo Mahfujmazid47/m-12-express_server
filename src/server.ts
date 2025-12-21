@@ -195,7 +195,7 @@ app.delete('/users/:id', async (req: Request, res: Response) => {
 
         // console.log(result.rows); // []
 
-        if (result.rows.length === 0) {
+        if (result.rowCount === 0) {
             res.status(404).json({
                 success: false,
                 message: "User not found"
