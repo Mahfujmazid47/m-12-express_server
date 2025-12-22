@@ -1,12 +1,9 @@
 import express, { NextFunction, Request, Response } from "express";
 import { Pool } from "pg"; // npx neonctl@latest init
-import dotenv from "dotenv";
-import path from "path";
-
-dotenv.config({ path: path.join(process.cwd(), ".env") });
+import config from "./config";
 
 const app = express();
-const port = 5000;
+const port = config.port;
 
 // parser
 app.use(express.json());
