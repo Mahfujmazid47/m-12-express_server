@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import { Pool } from "pg"; // npx neonctl@latest init
 import dotenv from "dotenv";
 import path from "path";
@@ -51,12 +51,19 @@ initDB();
 
 
 
+// logger Middleware
+const logger = (req: Request, res: Response, next: NextFunction) => {
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}\n`);
+    next();
+}
 
 
 
 
 
-app.get('/', (req: Request, res: Response) => {
+
+
+app.get('/', logger, (req: Request, res: Response) => {
     res.send('Hello Next level Developers!')
 });
 
@@ -267,7 +274,7 @@ app.get('/todos', async (req: Request, res: Response) => {
 
 
 // If no routes match 
-app.use((req, res)=> {
+app.use((req, res) => {
     res.status(404).json({
         success: false,
         message: "Route not found!",
