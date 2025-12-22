@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response } from "express";
 
 import config from "./config";
 import initDB, { pool } from "./config/db";
+import logger from "./middleware/logger";
 
 const app = express();
 const port = config.port;
@@ -19,10 +20,7 @@ initDB();
 
 
 // logger Middleware
-const logger = (req: Request, res: Response, next: NextFunction) => {
-    console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}\n`);
-    next();
-}
+
 
 
 
