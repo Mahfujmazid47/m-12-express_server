@@ -3,6 +3,7 @@ import express, { NextFunction, Request, Response } from "express";
 import config from "./config";
 import initDB, { pool } from "./config/db";
 import logger from "./middleware/logger";
+import { userRoutes } from "./modules/user/user.route";
 
 const app = express();
 const port = config.port;
@@ -27,7 +28,7 @@ initDB();
 
 
 
-
+// "/" => localhost:5000/
 app.get('/', logger, (req: Request, res: Response) => {
     res.send('Hello Next level Developers!')
 });
@@ -35,37 +36,40 @@ app.get('/', logger, (req: Request, res: Response) => {
 
 
 // users CRUD
+
+app.use("/users", userRoutes)
+
 // Post a user
-app.post('/users', async (req: Request, res: Response) => {
-    const { name, email } = req.body;
+// app.post('/users', async (req: Request, res: Response) => {
+//     const { name, email } = req.body;
 
-    try {
+//     try {
 
-        const result = await pool.query(
-            `INSERT INTO users(name, email) VALUES($1, $2) RETURNING *`, [name, email]
-        );
-        // console.log(result.rows[0]);
+//         const result = await pool.query(
+//             `INSERT INTO users(name, email) VALUES($1, $2) RETURNING *`, [name, email]
+//         );
+//         // console.log(result.rows[0]);
 
-        res.status(201).json({
-            success: true,
-            message: "data Inserted",
-            data: result.rows[0],
-        })
+//         res.status(201).json({
+//             success: true,
+//             message: "data Inserted",
+//             data: result.rows[0],
+//         })
 
-        // res.send({message: "data inserted"})
+//         // res.send({message: "data inserted"})
 
-    } catch (err: any) {
-        res.status(500).json({
-            success: false,
-            message: err.message,
-        })
-    }
+//     } catch (err: any) {
+//         res.status(500).json({
+//             success: false,
+//             message: err.message,
+//         })
+//     }
 
-    // res.status(201).json({
-    //     success: true,
-    //     message: "API is working",
-    // })
-});
+//     // res.status(201).json({
+//     //     success: true,
+//     //     message: "API is working",
+//     // })
+// });
 
 //get all users
 app.get('/users', async (req: Request, res: Response) => {
