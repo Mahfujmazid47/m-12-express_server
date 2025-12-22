@@ -1,0 +1,5 @@
+packages I installed 
+I installed many npm and other packages in this project but i forgot to write down them
+
+- npm i pg
+- npm i dotenv
