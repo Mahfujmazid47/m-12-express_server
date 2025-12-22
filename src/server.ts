@@ -241,6 +241,26 @@ app.post("/todos", async (req: Request, res: Response) => {
     }
 })
 
+//get all todos
+app.get('/todos', async (req: Request, res: Response) => {
+    try {
+        const result = await pool.query(`SELECT * FROM todos`);
+
+        res.status(200).json({
+            success: true,
+            message: "todos retrieved successfully!",
+            data: result.rows
+        })
+
+    } catch (error: any) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+            details: error
+        })
+    }
+});
+
 
 
 
