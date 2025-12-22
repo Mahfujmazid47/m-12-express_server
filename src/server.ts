@@ -299,6 +299,46 @@ app.get('/todos/:id', async (req: Request, res: Response) => {
     }
 })
 
+// Update single todo
+app.put('/users/:id', async (req: Request, res: Response) => {
+
+    const { title, completed } = req.body;
+
+    try {
+
+        const result = await pool.query(`UPDATE todos SET title=$1, completed=$2 WHERE id=$3 RETURNING *`, [title, completed, req.params.id]);
+
+        if (result.rows.length === 0) {
+            res.status(404).json({
+                success: false,
+                message: "Todos not found"
+            })
+        } else {
+            res.status(200).json({
+                success: true,
+                message: "Todos updated successfully!",
+                data: result.rows[0]
+            })
+        }
+
+    } catch (error: any) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+            details: error
+        })
+    }
+})
+
+
+
+
+
+
+
+
+
+
 
 
 
