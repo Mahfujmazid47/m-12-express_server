@@ -8,12 +8,12 @@ const createUser = async (name: string, email: string) => {
     return result;
 };
 
-const readUsers = async () => {
+const getUser = async () => {
     const result = await pool.query(`SELECT * FROM users`);
     return result;
 }
 
 export const userServices = {
     createUser,
-    readUsers
+    getUser
 };
