@@ -93,40 +93,40 @@ app.use("/users", userRoutes)
 
 
 // get a single user by id
-app.get('/users/:id', async (req: Request, res: Response) => {
+// app.get('/users/:id', async (req: Request, res: Response) => {
 
-    // console.log(req.params.id);
-    // res.send({message: "API is cool !!!"});
+//     // console.log(req.params.id);
+//     // res.send({message: "API is cool !!!"});
 
 
 
-    try {
+//     try {
 
-        const result = await pool.query(`SELECT * FROM users WHERE id = $1 `, [req.params.id]);
+//         const result = await pool.query(`SELECT * FROM users WHERE id = $1 `, [req.params.id]);
 
-        // console.log(result.rows); // []
+//         // console.log(result.rows); // []
 
-        if (result.rows.length === 0) {
-            res.status(404).json({
-                success: false,
-                message: "User not found"
-            })
-        } else {
-            res.status(200).json({
-                success: true,
-                message: "User fetched successfully!",
-                data: result.rows[0]
-            })
-        }
+//         if (result.rows.length === 0) {
+//             res.status(404).json({
+//                 success: false,
+//                 message: "User not found"
+//             })
+//         } else {
+//             res.status(200).json({
+//                 success: true,
+//                 message: "User fetched successfully!",
+//                 data: result.rows[0]
+//             })
+//         }
 
-    } catch (error: any) {
-        res.status(500).json({
-            success: false,
-            message: error.message,
-            details: error
-        })
-    }
-})
+//     } catch (error: any) {
+//         res.status(500).json({
+//             success: false,
+//             message: error.message,
+//             details: error
+//         })
+//     }
+// })
 
 
 // put (update the user)
