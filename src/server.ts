@@ -5,6 +5,7 @@ import initDB, { pool } from "./config/db";
 import logger from "./middleware/logger";
 import { userRoutes } from "./modules/user/user.route";
 import { todoRoutes } from "./modules/todo/todo.route";
+import { authRoutes } from "./modules/auth/auth.route";
 
 const app = express();
 const port = config.port;
@@ -174,6 +175,10 @@ app.use("/users", userRoutes)
 // create a todos
 
 app.use("/todos", todoRoutes);
+
+
+// auth Routes
+app.use("/auth", authRoutes);
 
 // app.post("/todos", async (req: Request, res: Response) => {
 //     const { user_id, title } = req.body;
