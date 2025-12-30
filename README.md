@@ -4,3 +4,4 @@ I installed many npm and other packages in this project but i forgot to write do
 - npm i pg
 - npm i dotenv
 - npm i bcryptjs
+- npm i jsonwebtoken
