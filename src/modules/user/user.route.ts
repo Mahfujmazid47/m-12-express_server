@@ -1,6 +1,8 @@
 import express, { Request, Response } from "express";
 import { pool } from "../../config/db";
 import { userControllers } from "./user.controller";
+import auth from "../../middleware/auth";
+import logger from "../../middleware/logger";
 
 const router = express.Router();
 
@@ -12,7 +14,7 @@ const router = express.Router();
 // Post a user
 router.post("/", userControllers.createUser);
 
-router.get("/", userControllers.getUser);
+router.get("/", logger, auth(), userControllers.getUser);
 
 router.get("/:id", userControllers.getSingleUser);
 
