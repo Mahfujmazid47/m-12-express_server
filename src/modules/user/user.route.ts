@@ -14,9 +14,9 @@ const router = express.Router();
 // Post a user
 router.post("/", userControllers.createUser);
 
-router.get("/", logger, auth(), userControllers.getUser);
+router.get("/", logger, auth("admin"), userControllers.getUser);
 
-router.get("/:id", userControllers.getSingleUser);
+router.get("/:id", auth("admin", "user"),userControllers.getSingleUser);
 
 router.put("/:id", userControllers.updateUser);
 
